@@ -1,0 +1,121 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <link rel="shortcut icon" type="x-icon" href="count.jpg">
+</head>
+<body id="body" style="background-color: #07f;">
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+            font-family: "Poppins" , sans-serif;
+        }
+        .container{
+            position: absolute;
+            transform: translate(-50% , -50%);
+            padding: 2.5em 3em;
+            top: 50%;
+            left: 50%;
+            background-color: #fff;
+            border-radius: 0.62em;
+        }
+        h2{
+            margin-bottom: 0.75em;
+            text-align: center;
+        }
+        button{
+            font-size: 1.5em;
+            border: none;
+        }
+        #plus{
+            background-color: #0f0;
+            border-radius: 0.62em;
+            color: white;
+        }
+        #minus{
+            background-color: #f00;
+            border-radius: 0.62em;
+            color: white;
+        }
+        #reset{
+            color: white;
+            background-color: gray;
+            border-radius: 0.62em;
+            width: 3.7em;
+        }
+        table{
+            margin-left: 0.75em;
+        }
+        #h{
+            font-size: 2.5em;
+        }
+        #plus:hover{
+            background-color: white;
+            color: #0f0;
+        }
+        #minus:hover{
+            background-color: white;
+            color: #f00;
+        }
+        #reset:hover{
+            background-color: white;
+            color: gray;
+            border: solid gray 2px;
+        }
+        #tr{
+            height: 2.5em;
+        }
+    </style>
+    <div class="container">
+        <h2>COUNTER</h2>
+        <h2 id="h" style="color: #000;">0</h2>
+        <table>
+            <tr id="tr">
+                <td><button id="minus" title="Subtract 1">&nbsp;-&nbsp;</button></td>
+                <td><button id="reset" title="Reset">Reset</button></td>
+                <td><button id="plus" title="Add 1">&nbsp;+&nbsp;</button></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        let result = 0;
+        function changeColor() {
+            if(result > -1){
+                document.getElementById("h").style.color = "#000";
+            }
+            else{
+                document.getElementById("h").style.color = "f00";
+            }
+        }
+        function add() {
+            result += 1;
+            document.getElementById("h").innerHTML = result;
+            changeColor();
+        }
+        function subt() {
+            result -= 1;
+            document.getElementById("h").innerHTML = result;
+            changeColor();
+        }
+        function reset() {
+            result = 0;
+            document.getElementById("h").innerHTML = result;
+            changeColor();
+        }
+        document.getElementById("plus").addEventListener("click", add);
+        document.getElementById("minus").addEventListener("click", subt);
+        document.getElementById("reset").addEventListener("click", reset);
+        document.body.addEventListener("keydown", (ev) => {
+            if(ev.key == "ArrowUp"){
+                add();
+            } else if(ev.key == "ArrowDown"){
+                subt();
+            }else if(ev.key == " "){
+                reset();
+            }
+        });
+    </script>
+</body>
+</html>
