@@ -1,0 +1,184 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="x-icon" href="timer.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Stopwatch</title>
+</head>
+<body>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-image: url("neon.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            font-family: "Poppins" , sans-serif;
+            font-size: 1.5em;
+        }
+        .container{
+            position: absolute;
+            transform: translate(-50% , -45%);
+            padding: 2.5em 3em;
+            top: 50%;
+            left: 50%;
+            border-radius: 1em;
+            font-size: 1.4em;
+            background-color: #fff;
+            width: 70vmin;
+        }
+        h3{
+            text-align: center;
+        }
+        .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+        }
+        button{
+            border-radius: 2em;
+            border: solid 1px #222;
+            height: 4em;
+            width: 4em;
+        }
+        .btns{
+            margin: 2.5em calc(calc(70vmin - 7em) / 2 + 0.75em) 0;
+            width: 7em;
+        }
+    </style>
+    <div class="container">
+        <h3 id="watch">00:00:00.00</h3>
+        <div class="btns">
+            <button id="pause"><span class="material-symbols-outlined" id="spp">pause_circle</span></button>
+            <button id="start" title="Start"><span class="material-symbols-outlined" id="sps">play_circle</span></button>
+            <button id="reset"><span class="material-symbols-outlined" id="spr">stop_circle</span></button>
+        </div>
+    </div>
+    <script>
+        showingTime = false;
+        working = false;
+        shours = "00";
+        sminutes = "00";
+        sseconds = "00";
+        scentiseconds = "00";
+        hours = 0;
+        minutes = 0;
+        seconds = 0;
+        centiseconds = 0;
+        pauseBTN = document.getElementById("pause");
+        startBTN = document.getElementById("start");
+        resetBTN = document.getElementById("reset");
+        watch = document.getElementById("watch");
+        pauseBTN.addEventListener("click" , pauseFun);
+        startBTN.addEventListener("click" , startFun);
+        resetBTN.addEventListener("click" , resetFun);
+        function hide(str) {
+            str.style.backgroundColor = "#fff";
+            str.style.borderColor = "#fff";
+            str.title = "";
+        }
+        function show(str) {
+            str.style.backgroundColor = "#f0f0f0";
+            str.style.borderColor = "#000";
+            if(str == resetBTN) {
+                str.title = "Reset";
+            }else if(str == startBTN) {
+                str.title = "Start";
+            }else if(str == pauseBTN) {
+                str.title = "Pause";
+            }
+        }
+        function fix() {
+            if(working == true && showingTime == true) {
+                document.querySelector("#sps").innerHTML = "";
+                document.querySelector("#spr").innerHTML = "stop_circle";
+                document.querySelector("#spp").innerHTML = "pause_circle";
+                hide(startBTN);
+                show(pauseBTN);
+                show(resetBTN);
+            }else if(working == false && showingTime == true) {
+                document.querySelector("#spp").innerHTML = "";
+                document.querySelector("#spr").innerHTML = "stop_circle";
+                document.querySelector("#sps").innerHTML = "play_circle";
+                hide(pauseBTN);
+                show(resetBTN);
+                show(startBTN);
+            }else if(working == false && showingTime == false) {
+                document.querySelector("#spr").innerHTML = "";
+                document.querySelector("#spp").innerHTML = "";
+                document.querySelector("#sps").innerHTML = "play_circle";
+                hide(resetBTN);
+                hide(pauseBTN);
+                show(startBTN);
+            }
+        }
+        function pauseFun() {
+            clearInterval(interval);
+            working = false;
+        }
+        function startFun() {
+            if(working == false) {
+                interval = setInterval(function() {
+                    working = true;
+                    centiseconds += 1;
+                    if(centiseconds == 100) {
+                        centiseconds = 0;
+                        seconds += 1;
+                        if(seconds == 60) {
+                            seconds = 0;
+                            minutes += 1;
+                            if(minutes == 60) {
+                                minutes = 0;
+                                hours += 1;
+                            }
+                        }
+                    }
+                    if(hours < 10) {
+                        shours = "0" + hours.toString();
+                    }else{
+                        shours = hours.toString();
+                    }
+                    if(minutes < 10) {
+                        sminutes = "0" + minutes.toString();
+                    }else{
+                        sminutes = minutes.toString();
+                    }
+                    if(seconds < 10) {
+                        sseconds = "0" + seconds.toString();
+                    }else{
+                        sseconds = seconds.toString();
+                    }
+                    if(centiseconds < 10) {
+                        scentiseconds = "0" + centiseconds.toString();
+                    }else{
+                        scentiseconds = centiseconds.toString();
+                    }
+                    watch.innerHTML = shours + ":" + sminutes + ":" + sseconds + "." + scentiseconds;
+                    showingTime = true;
+                } , 10);
+            }
+        }
+        function resetFun() {
+            working = false;
+            showingTime = false;
+            shours = "00";
+            sminutes = "00";
+            sseconds = "00";
+            scentiseconds = "00";
+            hours = 0;
+            minutes = 0;
+            seconds = 0;
+            centiseconds = 0;
+            clearInterval(interval);
+            watch.innerHTML = "00:00:00.00";
+        }
+        setInterval(fix , 10);
+    </script>
+</body>
+</html>
