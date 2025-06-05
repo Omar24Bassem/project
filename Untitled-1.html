@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خروجتي</title>
+    <style>
+        div{
+            place-self: center;
+            top: 35%;
+            position: absolute;
+            background-color: white;
+            border-radius: 15px;
+            padding: 10px;
+            transition: 0.7s ease;
+            box-shadow: 0 5px 25px rgba(0 0 0 / 35%);
+        }
+        div:hover{
+            transform: scale(1.35);
+        }
+        h1{
+            text-align: center;
+        }
+        body{
+            display: grid;
+            background-image: linear-gradient(to left,#07f, yellow);
+            font-family: "Poppins" , sans-serif;
+        }
+        td{
+            font-size: large;
+        }
+        td.bold{
+            font-weight: bolder;
+        }
+        td{
+            font-weight: bold;
+        }
+        table, td, tr{
+            border: solid 3px #000;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>خروجتي</h1>
+    <table>
+        <tr>
+            <td>3:30 PM</td>
+            <td class="bold">الوقت</td>
+        </tr>
+        <tr>
+            <td>عند محطة مترو روض الفرج</td>
+            <td class="bold">مكان المقابلة</td>
+        </tr>
+        <tr>
+            <td>الثلاثاء, 10/6/2025, الموافق خامس يوم عيد الأضحى</td>
+            <td class="bold">اليوم</td>
+        </tr>
+        <tr>
+            <td> 250 L.E <br> بدون مصاريف المواصلات <br> (قابلة للزيادة او النقصان)</td>
+            <td class="bold">المبلغ</td>
+        </tr>
+        <tr>
+            <td>عمر, طاهر, ستيفن, حسن و انطونيوس</td>
+            <td class="bold">الأفراد</td>
+        </tr>
+    </table>
+    </div>
+</body>
+</html>
